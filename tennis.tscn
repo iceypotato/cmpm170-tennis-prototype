@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://chsmf4cwqqyjb"]
+[gd_scene load_steps=11 format=3 uid="uid://chsmf4cwqqyjb"]
 
 [ext_resource type="Texture2D" uid="uid://bds1plo67w2es" path="res://assets/ball.png" id="1_2yjh5"]
 [ext_resource type="Texture2D" uid="uid://scy8se60d341" path="res://assets/paddle.png" id="2_hepyb"]
+[ext_resource type="Script" path="res://src/leftpaddle.cs" id="3_h6ije"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlyo2"]
 size = Vector2(16, 192)
@@ -13,10 +14,16 @@ size = Vector2(320, 16)
 size = Vector2(16, 192)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ggqym"]
-size = Vector2(320, 16)
+size = Vector2(1152, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bux8n"]
 size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vlnw"]
+size = Vector2(32, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4wbq"]
+size = Vector2(32, 48)
 
 [node name="Tennis" type="Node2D"]
 
@@ -33,15 +40,16 @@ position = Vector2(160, -8)
 shape = SubResource("RectangleShape2D_0a1pn")
 
 [node name="Right Wall" type="Area2D" parent="."]
-position = Vector2(328, 96)
+position = Vector2(1160, 320)
 
 [node name="collision" type="CollisionShape2D" parent="Right Wall"]
 shape = SubResource("RectangleShape2D_xqnhh")
 
 [node name="Bottom Wall" type="Area2D" parent="."]
-position = Vector2(160, 200)
+position = Vector2(576, 648)
 
 [node name="collision" type="CollisionShape2D" parent="Bottom Wall"]
+visible = false
 shape = SubResource("RectangleShape2D_ggqym")
 
 [node name="ball" type="Area2D" parent="."]
@@ -56,9 +64,13 @@ shape = SubResource("RectangleShape2D_bux8n")
 [node name="left paddle" type="Area2D" parent="."]
 modulate = Color(1, 0, 0, 1)
 position = Vector2(64, 96)
+script = ExtResource("3_h6ije")
 
 [node name="paddle" type="Sprite2D" parent="left paddle"]
 texture = ExtResource("2_hepyb")
+
+[node name="collision" type="CollisionShape2D" parent="left paddle"]
+shape = SubResource("RectangleShape2D_0vlnw")
 
 [node name="right paddle" type="Area2D" parent="."]
 modulate = Color(0, 0, 1, 1)
@@ -67,7 +79,13 @@ position = Vector2(256, 96)
 [node name="paddle" type="Sprite2D" parent="right paddle"]
 texture = ExtResource("2_hepyb")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right paddle"]
+shape = SubResource("RectangleShape2D_l4wbq")
+
 [node name="divider" type="Area2D" parent="."]
 position = Vector2(156, 96)
 
 [node name="divider" type="Sprite2D" parent="divider"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(252, 377)

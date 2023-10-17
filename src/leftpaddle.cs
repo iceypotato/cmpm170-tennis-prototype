@@ -14,7 +14,29 @@ public partial class leftpaddle : Area2D
 		ProcessInput();
 	}
 
-	private void ProcessInput() {
-		float input = Input.GetActionStrength()
+	private void ProcessInput()
+	{
+		if (Input.GetActionStrength("left paddle move up") > 0)
+		{
+			this.Position += new Vector2(0, -2);
+		}
+		if (Input.GetActionStrength("left paddle move down") > 0)
+		{
+			this.Position += new Vector2(0, 2);
+		}
+		
+	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("left paddle move up"))
+		{
+			this.Position += new Vector2(0, 10);
+		}
+	}
+
+	public void OnAreaEntered(Area2D area)
+	{
+		
 	}
 }
