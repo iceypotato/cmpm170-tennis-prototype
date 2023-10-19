@@ -34,14 +34,6 @@ public partial class RightPaddle : Area2D
 		}
 	}
 
-	public override void _Input(InputEvent @event)
-	{
-		if (@event.IsActionPressed("right paddle move up"))
-		{
-			this.Position += new Vector2(0, 10);
-		}
-	}
-
 	public void OnAreaEntered(Area2D area)
 	{
 		if (area is Ball ball)

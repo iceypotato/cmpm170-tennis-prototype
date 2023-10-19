@@ -3,6 +3,7 @@ using System;
 
 public partial class LeftPaddle : Area2D
 {
+	private bool _touchingWall = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -16,6 +17,7 @@ public partial class LeftPaddle : Area2D
 
 	private void ProcessInput()
 	{
+		if (_touchingWall) return;
 		if (Input.GetActionStrength("left paddle move up") > 0)
 		{
 			this.Position += new Vector2(0, -2);
@@ -35,20 +37,17 @@ public partial class LeftPaddle : Area2D
 		
 	}
 
-	public override void _Input(InputEvent @event)
-	{
-		//if (@event.IsActionPressed("left paddle move up"))
-		//{
-		//	this.Position += new Vector2(0, 10);
-		//}
-	}
-
 	public void OnAreaEntered(Area2D area)
 	{
 		if (area is Ball ball)
 		{
 			// Assign new direction
 			ball.Direction = new Vector2(1, ((float)new Random().NextDouble()) * 2 - 1).Normalized();
+		}
+
+		if (area is Walls wall || area is Boundary boundary)
+		{
+			_touchingWall = true;
 		}
 	}
 }
