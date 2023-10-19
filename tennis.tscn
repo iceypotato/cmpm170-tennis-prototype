@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://chsmf4cwqqyjb"]
+[gd_scene load_steps=14 format=3 uid="uid://chsmf4cwqqyjb"]
 
+[ext_resource type="Script" path="res://src/CeilingFloor.cs" id="1_0cypm"]
 [ext_resource type="Texture2D" uid="uid://bds1plo67w2es" path="res://assets/ball.png" id="1_2yjh5"]
 [ext_resource type="Script" path="res://src/Ball.cs" id="1_8p13o"]
 [ext_resource type="Texture2D" uid="uid://scy8se60d341" path="res://assets/paddle.png" id="2_hepyb"]
@@ -37,6 +38,7 @@ shape = SubResource("RectangleShape2D_dlyo2")
 
 [node name="Top Wall" type="Area2D" parent="."]
 position = Vector2(576, -8)
+script = ExtResource("1_0cypm")
 
 [node name="collision" type="CollisionShape2D" parent="Top Wall"]
 shape = SubResource("RectangleShape2D_0a1pn")
@@ -49,6 +51,8 @@ shape = SubResource("RectangleShape2D_xqnhh")
 
 [node name="Bottom Wall" type="Area2D" parent="."]
 position = Vector2(576, 648)
+script = ExtResource("1_0cypm")
+_bounceDirection = -1
 
 [node name="collision" type="CollisionShape2D" parent="Bottom Wall"]
 shape = SubResource("RectangleShape2D_ggqym")
@@ -98,5 +102,7 @@ position = Vector2(576, 320)
 scale = Vector2(1.99999, 1.6)
 texture = ExtResource("4_ulr7i")
 
+[connection signal="area_entered" from="Top Wall" to="Top Wall" method="OnAreaEntered"]
+[connection signal="area_entered" from="Bottom Wall" to="Bottom Wall" method="OnAreaEntered"]
 [connection signal="area_entered" from="left paddle" to="left paddle" method="OnAreaEntered"]
 [connection signal="area_entered" from="right paddle" to="right paddle" method="OnAreaEntered"]
