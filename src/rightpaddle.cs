@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class rightpaddle : Area2D
+public partial class RightPaddle : Area2D
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -24,7 +24,14 @@ public partial class rightpaddle : Area2D
 		{
 			this.Position += new Vector2(0, 2);
 		}
-		
+		if (Input.GetActionStrength("right paddle move left") > 0)
+		{
+			this.Position += new Vector2(-2, 0);
+		}
+		if (Input.GetActionStrength("right paddle move right") > 0)
+		{
+			this.Position += new Vector2(2, 0);
+		}
 	}
 
 	public override void _Input(InputEvent @event)
@@ -37,6 +44,10 @@ public partial class rightpaddle : Area2D
 
 	public void OnAreaEntered(Area2D area)
 	{
-		
+		if (area is Ball ball)
+		{
+			// Assign new direction
+			ball.direction = new Vector2(-1, ((float)new Random().NextDouble()) * 2 - 1).Normalized();
+		}
 	}
 }
