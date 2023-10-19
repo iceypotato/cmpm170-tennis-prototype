@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dp8lmbqk6olrc"]
+[gd_scene load_steps=22 format=3 uid="uid://dp8lmbqk6olrc"]
 
 [ext_resource type="Texture2D" uid="uid://bds1plo67w2es" path="res://assets/ball.png" id="1_2yjh5"]
 [ext_resource type="Script" path="res://src/Ball.cs" id="1_8p13o"]
@@ -8,18 +8,19 @@
 [ext_resource type="Script" path="res://src/LeftPaddle.cs" id="4_5tffv"]
 [ext_resource type="Texture2D" uid="uid://c5qklcs8rvsse" path="res://assets/separator.png" id="4_ulr7i"]
 [ext_resource type="Script" path="res://src/RightPaddle.cs" id="6_lhjse"]
-[ext_resource type="Script" path="res://src/Player.cs" id="8_ed3fc"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfsl6"]
+[ext_resource type="Script" path="res://src/LeftPaddleArea.cs" id="7_55t7c"]
+[ext_resource type="Script" path="res://src/RightPaddleArea.cs" id="9_6adb0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlyo2"]
 size = Vector2(16, 640)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0a1pn"]
-size = Vector2(1152, 16)
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vfsl6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xqnhh"]
 size = Vector2(16, 640)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0a1pn"]
+size = Vector2(1152, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ggqym"]
 size = Vector2(1152, 16)
@@ -27,11 +28,11 @@ size = Vector2(1152, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bux8n"]
 size = Vector2(8, 8)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vlnw"]
-size = Vector2(32, 48)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brg4o"]
 size = Vector2(8, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vlnw"]
+size = Vector2(32, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4wbq"]
 size = Vector2(32, 48)
@@ -48,11 +49,26 @@ size = Vector2(16, 640)
 position = Vector2(-8, 320)
 script = ExtResource("1_jfdoa")
 
+[node name="collision" type="CollisionShape2D" parent="Left Wall"]
+shape = SubResource("RectangleShape2D_dlyo2")
+
 [node name="body" type="StaticBody2D" parent="Left Wall"]
 physics_material_override = SubResource("PhysicsMaterial_vfsl6")
 
 [node name="collision" type="CollisionShape2D" parent="Left Wall/body"]
 shape = SubResource("RectangleShape2D_dlyo2")
+
+[node name="Right Wall" type="Area2D" parent="."]
+position = Vector2(1160, 320)
+script = ExtResource("1_jfdoa")
+
+[node name="collision" type="CollisionShape2D" parent="Right Wall"]
+shape = SubResource("RectangleShape2D_xqnhh")
+
+[node name="body" type="StaticBody2D" parent="Right Wall"]
+
+[node name="collision" type="CollisionShape2D" parent="Right Wall/body"]
+shape = SubResource("RectangleShape2D_xqnhh")
 
 [node name="Top Wall" type="Area2D" parent="."]
 position = Vector2(576, -8)
@@ -61,20 +77,21 @@ script = ExtResource("1_oafqe")
 [node name="collision" type="CollisionShape2D" parent="Top Wall"]
 shape = SubResource("RectangleShape2D_0a1pn")
 
-[node name="Right Wall" type="Area2D" parent="."]
-position = Vector2(1160, 320)
-script = ExtResource("1_jfdoa")
+[node name="body" type="StaticBody2D" parent="Top Wall"]
 
-[node name="body" type="StaticBody2D" parent="Right Wall"]
-
-[node name="collision" type="CollisionShape2D" parent="Right Wall/body"]
-shape = SubResource("RectangleShape2D_xqnhh")
+[node name="collision" type="CollisionShape2D" parent="Top Wall/body"]
+shape = SubResource("RectangleShape2D_0a1pn")
 
 [node name="Bottom Wall" type="Area2D" parent="."]
 position = Vector2(576, 648)
 script = ExtResource("1_oafqe")
 
 [node name="collision" type="CollisionShape2D" parent="Bottom Wall"]
+shape = SubResource("RectangleShape2D_ggqym")
+
+[node name="body" type="StaticBody2D" parent="Bottom Wall"]
+
+[node name="collision" type="CollisionShape2D" parent="Bottom Wall/body"]
 shape = SubResource("RectangleShape2D_ggqym")
 
 [node name="ball" type="Area2D" parent="."]
@@ -87,60 +104,61 @@ texture = ExtResource("1_2yjh5")
 [node name="collider" type="CollisionShape2D" parent="ball"]
 shape = SubResource("RectangleShape2D_bux8n")
 
-[node name="left paddle" type="Area2D" parent="."]
-modulate = Color(1, 0, 0, 1)
+[node name="left paddle" type="CharacterBody2D" parent="."]
 position = Vector2(448, 320)
+motion_mode = 1
 script = ExtResource("4_5tffv")
 
-[node name="collision" type="CollisionShape2D" parent="left paddle"]
-shape = SubResource("RectangleShape2D_0vlnw")
-
-[node name="body" type="CharacterBody2D" parent="left paddle"]
-motion_mode = 1
-script = ExtResource("8_ed3fc")
-
-[node name="paddle" type="Sprite2D" parent="left paddle/body"]
+[node name="paddle" type="Sprite2D" parent="left paddle"]
 texture = ExtResource("2_hepyb")
 
-[node name="collision" type="CollisionShape2D" parent="left paddle/body"]
+[node name="collision" type="CollisionShape2D" parent="left paddle"]
 shape = SubResource("RectangleShape2D_brg4o")
 
-[node name="right paddle" type="Area2D" parent="."]
-modulate = Color(0, 0, 1, 1)
+[node name="ball range" type="Area2D" parent="left paddle"]
+modulate = Color(1, 0, 0, 1)
+script = ExtResource("7_55t7c")
+
+[node name="collision" type="CollisionShape2D" parent="left paddle/ball range"]
+shape = SubResource("RectangleShape2D_0vlnw")
+
+[node name="right paddle" type="CharacterBody2D" parent="."]
 position = Vector2(704, 320)
+motion_mode = 1
 script = ExtResource("6_lhjse")
 
-[node name="collision" type="CollisionShape2D" parent="right paddle"]
+[node name="ball range" type="Area2D" parent="right paddle"]
+modulate = Color(0, 0, 1, 1)
+script = ExtResource("9_6adb0")
+
+[node name="collision" type="CollisionShape2D" parent="right paddle/ball range"]
 shape = SubResource("RectangleShape2D_l4wbq")
 
-[node name="body" type="CharacterBody2D" parent="right paddle"]
-motion_mode = 1
-script = ExtResource("8_ed3fc")
-
-[node name="paddle" type="Sprite2D" parent="right paddle/body"]
+[node name="paddle" type="Sprite2D" parent="right paddle"]
 texture = ExtResource("2_hepyb")
 
-[node name="collision" type="CollisionShape2D" parent="right paddle/body"]
+[node name="collision" type="CollisionShape2D" parent="right paddle"]
 shape = SubResource("RectangleShape2D_mb1ja")
 
 [node name="divider" type="Area2D" parent="."]
 position = Vector2(576, 320)
 
 [node name="divider" type="Sprite2D" parent="divider"]
-
-[node name="collider" type="CollisionShape2D" parent="divider"]
-shape = SubResource("RectangleShape2D_tpvxv")
-
-[node name="Separator" type="Sprite2D" parent="."]
-position = Vector2(576, 320)
 scale = Vector2(1.99999, 1.6)
 texture = ExtResource("4_ulr7i")
 
+[node name="collision" type="CollisionShape2D" parent="divider"]
+visible = false
+shape = SubResource("RectangleShape2D_tpvxv")
+
+[node name="body" type="StaticBody2D" parent="divider"]
+
+[node name="collision" type="CollisionShape2D" parent="divider/body"]
+shape = SubResource("RectangleShape2D_xqnhh")
+
 [connection signal="area_entered" from="Left Wall" to="Left Wall" method="OnAreaEntered"]
-[connection signal="body_entered" from="Left Wall" to="Left Wall" method="BodyEntered"]
-[connection signal="body_exited" from="Left Wall" to="Left Wall" method="BodyExited"]
-[connection signal="area_entered" from="Top Wall" to="Top Wall" method="OnAreaEntered"]
 [connection signal="area_entered" from="Right Wall" to="Right Wall" method="OnAreaEntered"]
+[connection signal="area_entered" from="Top Wall" to="Top Wall" method="OnAreaEntered"]
 [connection signal="area_entered" from="Bottom Wall" to="Bottom Wall" method="OnAreaEntered"]
-[connection signal="area_entered" from="left paddle" to="left paddle" method="OnAreaEntered"]
-[connection signal="area_entered" from="right paddle" to="right paddle" method="OnAreaEntered"]
+[connection signal="area_entered" from="left paddle/ball range" to="left paddle/ball range" method="OnAreaEntered"]
+[connection signal="area_entered" from="right paddle/ball range" to="right paddle/ball range" method="OnAreaEntered"]
