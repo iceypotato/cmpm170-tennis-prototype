@@ -47,7 +47,7 @@ public partial class RightPaddle : Area2D
 		if (area is Ball ball)
 		{
 			// Assign new direction
-			ball.direction = new Vector2(-1, ((float)new Random().NextDouble()) * 2 - 1).Normalized();
+			ball.Direction = new Vector2(-1, ((float)new Random().NextDouble()) * 2 - 1).Normalized();
 		}
 	}
 }
