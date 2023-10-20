@@ -36,7 +36,7 @@ public partial class RightPaddleArea : Area2D
 
 	public void OnAreaEntered(Area2D area)
 	{
-		GD.Print("zone collision");
+		GD.Print("right paddle collision");
 		if (area is Ball ball && _playerHit)
 		{
 			GD.Print("hit");
