@@ -25,22 +25,6 @@ public partial class RightPaddleArea : Area2D
 
 	private void ProcessInput(double delta)
 	{
-		if (Input.GetActionStrength("right paddle move up") > 0)
-		{
-			this.Position += new Vector2(0, -2);
-		}
-		if (Input.GetActionStrength("right paddle move down") > 0)
-		{
-			this.Position += new Vector2(0, 2);
-		}
-		if (Input.GetActionStrength("right paddle move left") > 0)
-		{
-			this.Position += new Vector2(-2, 0);
-		}
-		if (Input.GetActionStrength("right paddle move right") > 0)
-		{
-			this.Position += new Vector2(2, 0);
-		}
 		if( Input.GetActionStrength("right paddle hit") > 0){
 
 			GD.Print("player intend hit");
