@@ -44,7 +44,8 @@ public partial class LeftPaddleArea : Area2D
 		{
 			GD.Print("hit");
 			// Assign new direction
-			ball.Direction = new Vector2(-11, ((float)new Random().NextDouble()) * 2 - 1).Normalized();
+			ball.Direction = new Vector2(-3, ((float)new Random().NextDouble()) * 2 - 1);
+			//.Normalized();
 		}
 	}
 }

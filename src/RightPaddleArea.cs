@@ -37,11 +37,11 @@ public partial class RightPaddleArea : Area2D
 	public void OnAreaEntered(Area2D area)
 	{
 		GD.Print("right paddle collision");
-		if (area is Ball ball && _playerHit)
+		if (area is Ball ball )
 		{
 			GD.Print("hit");
 			// Assign new direction
-			ball.Direction = new Vector2(1, 0);
+			ball.Direction = new Vector2(3,  ((float)new Random().NextDouble()) * 2 - 1);
 			GD.Print(ball.Direction);
 		} 
 	}

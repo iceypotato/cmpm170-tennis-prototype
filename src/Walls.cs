@@ -9,7 +9,7 @@ public partial class Walls : Area2D
 	{
 		if (area is Ball ball)
 		{
-			ball.Direction = (new Vector2(-ball.Direction.X, ball.Direction.Y)).Normalized();
+			ball.Direction = (new Vector2(-ball.Direction.X, ball.Direction.Y));//.Normalized();
 		}
 
 
