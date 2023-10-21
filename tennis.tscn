@@ -110,6 +110,7 @@ motion_mode = 1
 script = ExtResource("4_5tffv")
 
 [node name="paddle" type="Sprite2D" parent="left paddle"]
+modulate = Color(1, 0, 0, 1)
 texture = ExtResource("2_hepyb")
 
 [node name="collision" type="CollisionShape2D" parent="left paddle"]
@@ -135,6 +136,7 @@ script = ExtResource("9_6adb0")
 shape = SubResource("RectangleShape2D_l4wbq")
 
 [node name="paddle" type="Sprite2D" parent="right paddle"]
+modulate = Color(0, 0, 1, 1)
 texture = ExtResource("2_hepyb")
 
 [node name="collision" type="CollisionShape2D" parent="right paddle"]
@@ -161,4 +163,6 @@ shape = SubResource("RectangleShape2D_xqnhh")
 [connection signal="area_entered" from="Top Wall" to="Top Wall" method="OnAreaEntered"]
 [connection signal="area_entered" from="Bottom Wall" to="Bottom Wall" method="OnAreaEntered"]
 [connection signal="area_entered" from="left paddle/ball range" to="left paddle/ball range" method="OnAreaEntered"]
+[connection signal="area_exited" from="left paddle/ball range" to="left paddle/ball range" method="OnAreaExited"]
 [connection signal="area_entered" from="right paddle/ball range" to="right paddle/ball range" method="OnAreaEntered"]
+[connection signal="area_exited" from="right paddle/ball range" to="right paddle/ball range" method="OnAreaExited"]
