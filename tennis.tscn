@@ -94,8 +94,18 @@ shape = SubResource("RectangleShape2D_ggqym")
 [node name="collision" type="CollisionShape2D" parent="Bottom Wall/body"]
 shape = SubResource("RectangleShape2D_ggqym")
 
+[node name="ball2" type="Area2D" parent="."]
+position = Vector2(640, 320)
+script = ExtResource("1_8p13o")
+
+[node name="ball" type="Sprite2D" parent="ball2"]
+texture = ExtResource("1_2yjh5")
+
+[node name="collider" type="CollisionShape2D" parent="ball2"]
+shape = SubResource("RectangleShape2D_bux8n")
+
 [node name="ball" type="Area2D" parent="."]
-position = Vector2(576, 320)
+position = Vector2(512, 320)
 script = ExtResource("1_8p13o")
 
 [node name="ball" type="Sprite2D" parent="ball"]
@@ -105,7 +115,7 @@ texture = ExtResource("1_2yjh5")
 shape = SubResource("RectangleShape2D_bux8n")
 
 [node name="left paddle" type="CharacterBody2D" parent="."]
-position = Vector2(448, 320)
+position = Vector2(256, 320)
 motion_mode = 1
 script = ExtResource("4_5tffv")
 
@@ -124,7 +134,7 @@ script = ExtResource("7_55t7c")
 shape = SubResource("RectangleShape2D_0vlnw")
 
 [node name="right paddle" type="CharacterBody2D" parent="."]
-position = Vector2(704, 320)
+position = Vector2(896, 320)
 motion_mode = 1
 script = ExtResource("6_lhjse")
 
@@ -150,7 +160,6 @@ scale = Vector2(1.99999, 1.6)
 texture = ExtResource("4_ulr7i")
 
 [node name="collision" type="CollisionShape2D" parent="divider"]
-visible = false
 shape = SubResource("RectangleShape2D_tpvxv")
 
 [node name="body" type="StaticBody2D" parent="divider"]

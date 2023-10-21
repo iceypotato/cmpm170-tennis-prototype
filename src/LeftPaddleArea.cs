@@ -20,7 +20,7 @@ public partial class LeftPaddleArea : Area2D
 		if (_playerHit)
 		{
 			_hitTime += delta;
-			if (_hitTime > 0.05)
+			if (_hitTime > 1.0)
 			{
 				_playerHit = false;
 				_hitTime = 0;
@@ -35,7 +35,12 @@ public partial class LeftPaddleArea : Area2D
 			GD.Print("player intend hit");
 			_playerHit = true;
 			_hitTime = delta;
-			_ball.Direction = new Vector2(-(_ball.Direction.X+1), _ball.Direction.Y);
+			_ball.Speed += 30;
+
+			var low = -0.5;
+			var hi = 0.5;
+			var range = hi - low;
+			_ball.Direction = new Vector2(_ball.Direction.X, (float)(new Random().NextDouble() * range + low)).Normalized();
 		}
 	}
 
@@ -47,9 +52,9 @@ public partial class LeftPaddleArea : Area2D
 		{
 			GD.Print("hit");
 			// Assign new direction
+			
 			_ball = ball;
 			_inArea = true;
-			// ball.Direction = new Vector2(-11, ((float)new Random().NextDouble()) * 2 - 1).Normalized();
 		}
 	}
 	
